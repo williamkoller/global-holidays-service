@@ -2,6 +2,7 @@ version: '3.1'
 services:
   backend_nest:
     container_name: global_service
+    restart: always
     build: .
     env_file:
       - .env
@@ -9,22 +10,23 @@ services:
       - ${PORT}:${PORT}
       - 9229:9229
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - .:/app
+      - /app/node_modules
     environment:
       - POSTGRES_HOST=database_pg
       - POSTGRES_PORT=5432
-      - REDIS_HOST=redis
+      - REDIS_HOST=nest_redis
       - REDIS_PORT=6379
 
     networks:
       - backend_nest
     depends_on:
-      - db_postgres
-      - redis
+      - database_pg
+      - nest_redis
 
   database_pg:
     image: postgres:13.1-alpine
+    restart: always
     container_name: database_postgres
     networks:
       - backend_nest
@@ -40,7 +42,7 @@ services:
     volumes:
       - nest_db_data:/var/lib/postgresql/data
 
-  redis:
+  nest_redis:
     image: 'bitnami/redis:latest'
     env_file:
       - .env
