@@ -1,6 +1,4 @@
-export type TypeEntity = BaseEntity
-
-export interface BaseEntity {
+export interface IEntity {
   id: string
   createdAt: Date
   createdBy: string
