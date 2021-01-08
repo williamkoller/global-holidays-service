@@ -1,8 +1,8 @@
-import { UserRoles } from 'src/roles/user.roles'
-import { TypeEntity } from 'src/shared/@types/base.type'
+import { UserRoles } from 'src/user/roles/user.roles'
+import { IEntity } from 'src/shared/@types/base.type'
 import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm'
 
-export abstract class BaseEntity implements TypeEntity {
+export abstract class BaseEntity implements IEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
