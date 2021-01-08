@@ -1,5 +1,5 @@
 import { UserRoles } from 'src/user/roles/user.roles'
-import { IEntity } from 'src/shared/@types/base.type'
+import { IEntity } from 'src/shared/interfaces/base.type'
 import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm'
 
 export abstract class BaseEntity implements IEntity {
