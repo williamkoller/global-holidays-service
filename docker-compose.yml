@@ -1,0 +1,60 @@
+version: '3.1'
+services:
+  backend_nest:
+    container_name: global_service
+    build: .
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+      - 9229:9229
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - POSTGRES_HOST=database_pg
+      - POSTGRES_PORT=5432
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+    networks:
+      - backend_nest
+    depends_on:
+      - db_postgres
+      - redis
+
+  database_pg:
+    image: postgres:13.1-alpine
+    container_name: database_postgres
+    networks:
+      - backend_nest
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - nest_db_data:/var/lib/postgresql/data
+
+  redis:
+    image: 'bitnami/redis:latest'
+    env_file:
+      - .env
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PORT=6379
+      - REDIS_HOST=localhost
+    networks:
+      - backend_nest
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    hostname: ${REDIS_HOST}
+
+networks:
+  backend_nest:
+volumes:
+  nest_db_data:
