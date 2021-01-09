@@ -1,5 +1,4 @@
 import { BadGatewayException, BadRequestException, Body, Controller, Post } from '@nestjs/common'
-import { RegisterRequestDto } from '../dtos/register-request.dto'
 import { AuthService } from '../services/auth.service'
 
 @Controller('auth')
@@ -11,14 +10,15 @@ export class AuthController {
     try {
       return await this.authService.authenticateUser(authenticateRequest)
     } catch (e) {
+      console.log(e)
       throw new BadRequestException(e.message)
     }
   }
 
   @Post('register')
-  async register(@Body() registerRequestDto: RegisterRequestDto): Promise<{ UserSub: string }> {
+  async register(@Body() registerRequest: { name: string; email: string; password: string }): Promise<any> {
     try {
-      return this.authService.registerUserCognito(registerRequestDto)
+      return this.authService.registerUserCognito(registerRequest)
     } catch (e) {
       throw new BadGatewayException(e.message)
     }

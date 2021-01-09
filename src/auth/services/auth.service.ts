@@ -1,21 +1,28 @@
-import { Inject, Injectable } from '@nestjs/common'
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common'
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
+
+import { User } from 'src/entities/user.entity'
 import { AwsService } from 'src/shared/aws/aws.service'
+import { UserService } from 'src/user/services/user.service'
 import { AuthConfig } from '../config/auth.config'
-import { RegisterRequestDto } from '../dtos/register-request.dto'
 
 @Injectable()
 export class AuthService {
-  private readonly userPool: CognitoUserPool
-  constructor(@Inject('AuthConfig') private readonly authConfig: AuthConfig, private readonly awsService: AwsService) {
+  private userPool: CognitoUserPool
+  constructor(
+    @Inject('AuthConfig') private readonly authConfig: AuthConfig,
+    private readonly awsService: AwsService,
+    private readonly userService: UserService,
+  ) {
     this.userPool = new CognitoUserPool({
       UserPoolId: authConfig.userPoolId,
       ClientId: authConfig.clientId,
     })
   }
 
-  registerUserCognito(registerRequestDto: RegisterRequestDto): Promise<{ UserSub: string }> {
-    return this.awsService.registerUserCognito(registerRequestDto)
+  registerUserCognito(registerRequest: { name: string; email: string; password: string }): Promise<any> {
+    const { name, email, password } = registerRequest
+    return this.awsService.registerUser({ name, email, password })
   }
 
   authenticateUser(user: { username: string; password: string }) {
@@ -41,5 +48,18 @@ export class AuthService {
         },
       })
     })
+  }
+
+  async formatUser(payload: any): Promise<User> {
+    const user = await this.parseUser(payload)
+    return user
+  }
+
+  private async parseUser(payload: { name: string; sub: string; email: string }): Promise<User> {
+    const user = await this.userService.findByIdWithoutLoggedInUser(payload.sub)
+    if (!user) {
+      throw new UnauthorizedException()
+    }
+    return user
   }
 }
