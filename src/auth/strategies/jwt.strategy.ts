@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService, private readonly authConfig: AuthConfig) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKeyProvider: async (request, jwtToken, done) => {
+      secretOrKeyProvider: async (request: any, jwtToken: any, done: any) => {
         this.tokenHeader = jwtToken
 
         const tokenSections = (jwtToken || '').split('.')
@@ -29,7 +29,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!payload) {
       throw new UnauthorizedException()
     }
-    const user = await this.authService.formatUser(payload)
-    return user
+    return payload
   }
 }
