@@ -2,16 +2,11 @@ import { Inject, Injectable } from '@nestjs/common'
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
 
 import { AwsService } from 'src/shared/aws/aws.service'
-import { UserService } from 'src/user/services/user.service'
 import { AuthConfig } from '../config/auth.config'
 @Injectable()
 export class AuthService {
   private userPool: CognitoUserPool
-  constructor(
-    @Inject('AuthConfig') private readonly authConfig: AuthConfig,
-    private readonly awsService: AwsService,
-    private readonly userService: UserService,
-  ) {
+  constructor(@Inject('AuthConfig') private readonly authConfig: AuthConfig, private readonly awsService: AwsService) {
     this.userPool = new CognitoUserPool({
       UserPoolId: authConfig.userPoolId,
       ClientId: authConfig.clientId,
