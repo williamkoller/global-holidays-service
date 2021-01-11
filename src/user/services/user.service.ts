@@ -16,7 +16,7 @@ export class UserService {
   async createAdminUser(data: CreateUserDto, userLoggedIn: User): Promise<User> {
     let cognitoUser = await this.awsService.checkIfUserExists({ email: data.email })
     if (!cognitoUser) {
-      cognitoUser = await this.awsService.createCognitoUser(data.email)
+      cognitoUser = await this.awsService.createCognitoUser(data)
     }
 
     const user = await this.userRepository.save({
