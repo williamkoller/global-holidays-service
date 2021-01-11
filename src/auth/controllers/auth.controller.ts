@@ -18,7 +18,7 @@ export class AuthController {
   @Post('register')
   async register(@Body() registerRequest: { name: string; email: string; password: string }): Promise<any> {
     try {
-      return this.authService.registerUserCognito(registerRequest)
+      return this.authService.registerUser(registerRequest)
     } catch (e) {
       throw new BadGatewayException(e.message)
     }
