@@ -11,6 +11,9 @@ export class CreateUserDto implements IRolesContainer {
   @IsNotEmpty()
   readonly email: string
 
+  @IsString()
+  readonly password: string
+
   @IsNotEmpty()
   readonly roles: UserRoles[]
 }
