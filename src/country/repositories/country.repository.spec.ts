@@ -29,5 +29,10 @@ describe('CountryRepository', () => {
       repository.find = jest.fn().mockReturnValue(undefined);
       await expect(repository.getAllCountry({})).rejects.toThrow(new NotFoundException('The Country not found.'));
     });
+
+    it('should be returns when find returns', async () => {
+      repository.find = jest.fn().mockReturnValue({});
+      expect(await repository.getAllCountry()).toEqual({});
+    });
   });
 });
