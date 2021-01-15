@@ -1,36 +1,36 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-import { Country } from './country.entity'
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Country } from './country.entity';
 
 @Entity('continents')
 export class Continent {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id: string;
 
   @Column()
-  name: string
+  name: string;
 
   @Column({ type: 'jsonb' })
   area: {
-    kilometers: number
-    percentage: number
-  }
+    kilometers: number;
+    percentage: number;
+  };
 
   @Column({ type: 'jsonb' })
   population: {
-    approximate: number
-    percentage: number
-  }
+    approximate: number;
+    percentage: number;
+  };
 
   @Column({ type: 'simple-array' })
   @ManyToOne(() => Country, (country) => country.continent)
-  contries: Country[]
+  contries: Country[];
 
   @Column()
-  totalContries: number
+  totalContries: number;
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date
+  updatedAt: Date;
 }
