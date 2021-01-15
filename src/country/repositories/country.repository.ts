@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common'
+import { Country } from '../../entities/country.entity';
+import { EntityRepository, Repository } from 'typeorm';
 
-@Injectable()
-export class CountryRepository {}
+@EntityRepository(Country)
+export class CountryRepository extends Repository<Country> {
+  async getAllCountry(): Promise<Country[]> {
+    return await this.find();
+  }
+}
