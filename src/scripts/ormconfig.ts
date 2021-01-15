@@ -1,7 +1,7 @@
-import { configService } from '../config/config.service'
-import fs = require('fs')
+import { configService } from '../config/config.service';
+import fs = require('fs');
 
-const [migrations, seed] = configService.getTypeOrmConfig()
+const [migrations, seed] = configService.getTypeOrmConfig();
 
 fs.writeFileSync(
   'ormconfig.json',
@@ -17,4 +17,4 @@ fs.writeFileSync(
     null,
     2,
   ),
-)
+);

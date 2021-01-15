@@ -1,5 +1,5 @@
 export type AuthRequestDto = {
-  username: string
-  email: string
-  password: string
-}
+  username: string;
+  email: string;
+  password: string;
+};

@@ -1,32 +1,32 @@
-import { IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator'
-import { Continent } from 'src/entities/continent.entity'
+import { IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator';
+import { Continent } from 'src/entities/continent.entity';
 
 export class CreateCountryDto {
   @IsString()
   @IsNotEmpty({ message: 'This field cannot be empty.' })
-  name: string
+  name: string;
 
   @IsString()
   @IsNotEmpty({ message: 'This field cannot be empty.' })
-  capitalContry: string
+  capitalContry: string;
 
   @IsNumber()
   @IsNotEmpty({ message: 'This field cannot be empty.' })
-  territorialExtension: number
+  territorialExtension: number;
 
   @IsString()
   @IsNotEmpty({ message: 'This field cannot be empty.' })
-  localization: string
+  localization: string;
 
   @IsString()
   @IsNotEmpty({ message: 'This field cannot be empty.' })
-  language: string
+  language: string;
 
   @IsString()
   @IsNotEmpty({ message: 'This field cannot be empty.' })
-  currency: string
+  currency: string;
 
   @IsObject()
   @IsNotEmpty({ message: 'This field cannot be empty.' })
-  continent: Continent
+  continent: Continent;
 }

@@ -1,40 +1,40 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 // tslint:disable-next-line:no-var-requires
-require('dotenv').config()
+require('dotenv').config();
 
 class ConfigService {
   constructor(private env: { [k: string]: string | undefined }) {}
 
   private getValue(key: string, throwOnMissing = true): string {
-    const value = this.env[key]
+    const value = this.env[key];
     if (!value && throwOnMissing) {
-      throw new Error(`config error - missing env.${key}`)
+      throw new Error(`config error - missing env.${key}`);
     }
 
-    return value
+    return value;
   }
 
   public ensureValues(keys: string[]) {
-    keys.forEach((k) => this.getValue(k, true))
-    return this
+    keys.forEach((k) => this.getValue(k, true));
+    return this;
   }
 
   public getSentryConfig() {
-    const environment = this.getValue('SENTRY_ENV', false) || 'LOCALHOST'
-    const dsn = this.getValue('SENTRY_DSN', false)
-    const bucketName = this.getValue('BUCKET', false)
-    const bucketRegion = this.getValue('AWS_REGION', false)
-    return { environment, dsn, bucketName, bucketRegion }
+    const environment = this.getValue('SENTRY_ENV', false) || 'LOCALHOST';
+    const dsn = this.getValue('SENTRY_DSN', false);
+    const bucketName = this.getValue('BUCKET', false);
+    const bucketRegion = this.getValue('AWS_REGION', false);
+    return { environment, dsn, bucketName, bucketRegion };
   }
 
   public getPort() {
-    return this.getValue('PORT', true)
+    return this.getValue('PORT', true);
   }
 
   public isProduction() {
-    const mode = this.getValue('MODE', false)
-    return mode !== 'DEVELOP'
+    const mode = this.getValue('MODE', false);
+    return mode !== 'DEVELOP';
   }
 
   public getTypeOrmConfig(): TypeOrmModuleOptions[] {
@@ -78,7 +78,7 @@ class ConfigService {
         retryDelay: 3000,
         keepConnectionAlive: false,
       },
-    ]
+    ];
   }
 }
 
@@ -88,6 +88,6 @@ const configService = new ConfigService(process.env).ensureValues([
   'POSTGRES_USER',
   'POSTGRES_PASSWORD',
   'POSTGRES_DATABASE',
-])
+]);
 
-export { configService }
+export { configService };

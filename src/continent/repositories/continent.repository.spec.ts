@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing'
-import { ContinentRepository } from './continent.repository'
+import { Test, TestingModule } from '@nestjs/testing';
+import { ContinentRepository } from './continent.repository';
 
 describe('ContinentRepository', () => {
-  let repository: ContinentRepository
+  let repository: ContinentRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ContinentRepository],
-    }).compile()
+    }).compile();
 
-    repository = module.get<ContinentRepository>(ContinentRepository)
-  })
+    repository = module.get<ContinentRepository>(ContinentRepository);
+  });
 
   it('should be defined', () => {
-    expect(repository).toBeDefined()
-  })
-})
+    expect(repository).toBeDefined();
+  });
+});

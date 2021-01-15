@@ -1,36 +1,36 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-import { Continent } from './continent.entity'
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Continent } from './continent.entity';
 
 @Entity('countries')
 export class Country {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id: string;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  capitalContry: string
+  capitalContry: string;
 
   @Column()
-  territorialExtension: number
+  territorialExtension: number;
 
   @Column()
-  localization: string
+  localization: string;
 
   @Column()
-  language: string
+  language: string;
 
   @Column()
-  currency: string
+  currency: string;
 
   @Column('simple-array')
   @OneToMany(() => Continent, (continent) => continent.contries)
-  continent: Continent
+  continent: Continent;
 
   @CreateDateColumn()
-  createdAt: Date
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date
+  updatedAt: Date;
 }

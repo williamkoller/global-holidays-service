@@ -1,9 +1,9 @@
-import { forwardRef, Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { configService } from './config/config.service'
-import { AuthModule } from './auth/auth.module'
-import { ContinentModule } from './continent/continent.module'
-import { CountryModule } from './country/country.module'
+import { forwardRef, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { configService } from './config/config.service';
+import { AuthModule } from './auth/auth.module';
+import { ContinentModule } from './continent/continent.module';
+import { CountryModule } from './country/country.module';
 
 @Module({
   imports: [
