@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CountryRepository } from './country.repository';
 
@@ -22,6 +23,11 @@ describe('CountryRepository', () => {
       repository.find = jest.fn().mockReturnValue({});
       await repository.getAllCountry();
       expect(repository.find).toBeCalledWith();
+    });
+
+    it('should be throw find returns empty', async () => {
+      repository.find = jest.fn().mockReturnValue(undefined);
+      await expect(repository.getAllCountry({})).rejects.toThrow(new NotFoundException('The Country not found.'));
     });
   });
 });
