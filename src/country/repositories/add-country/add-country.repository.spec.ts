@@ -1,9 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AddCountryRepository } from './add-country.repository';
+import { Country } from '../../../entities/country.entity';
+import { Continent } from '../../../entities/continent.entity';
+import { InternalServerErrorException } from '@nestjs/common';
 
 describe('AddCountryRepository', () => {
   let repository;
   let mockData;
+  let mockError;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -11,18 +15,27 @@ describe('AddCountryRepository', () => {
     }).compile();
 
     repository = module.get<AddCountryRepository>(AddCountryRepository);
+    mockData = {
+      name: 'Brazil',
+      capitalContry: 'Brasilia',
+      territorialExtension: 854100,
+      localization: 'South America',
+      language: 'Portuguese',
+      currency: 'Real',
+      continent: 'Latin America',
+    };
+    mockError = {
+      name: 'INVALID',
+      continent: new Continent(),
+      language: 'INVALID',
+      currency: 'INVALID',
+      localization: 'INVALID',
+      territorialExtension: undefined,
+      capitalContry: 'INVALID',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    } as Country;
     repository.save = jest.fn();
-    mockData = [
-      {
-        name: 'Brazil',
-        capitalContry: 'Brasilia',
-        territorialExtension: 8510295914,
-        localization: 'South America',
-        language: 'Portuguese',
-        currency: 'Real',
-        continent: 'Latin America',
-      },
-    ];
   });
   it('should be defined', () => {
     expect(repository).toBeDefined();
@@ -37,5 +50,10 @@ describe('AddCountryRepository', () => {
   it('should be throw when save throw', async () => {
     repository.save = jest.fn().mockRejectedValue(new Error());
     await expect(repository.addCountry(mockData)).rejects.toThrow();
+  });
+
+  it('should be throw if called with invalid params', async () => {
+    (repository.save as jest.Mock).mockRejectedValue(new InternalServerErrorException());
+    await expect(repository.addCountry(mockError)).rejects.toThrow(new InternalServerErrorException());
   });
 });
