@@ -22,8 +22,8 @@ describe('AddCountryRepository', () => {
       localization: 'South America',
       language: 'Portuguese',
       currency: 'Real',
-      continent: 'Latin America',
-    };
+      continent: new Continent(),
+    } as Country;
     mockError = {
       name: 'INVALID',
       continent: new Continent(),
@@ -32,8 +32,6 @@ describe('AddCountryRepository', () => {
       localization: 'INVALID',
       territorialExtension: undefined,
       capitalContry: 'INVALID',
-      createdAt: new Date(),
-      updatedAt: new Date(),
     } as Country;
     repository.save = jest.fn();
   });
