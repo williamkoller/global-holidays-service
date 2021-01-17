@@ -2,9 +2,9 @@
   "name": "global-holidays-service",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "William Koller",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
