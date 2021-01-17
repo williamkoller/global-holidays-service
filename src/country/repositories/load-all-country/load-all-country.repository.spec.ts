@@ -1,17 +1,17 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { FindCountryRepository } from './find-country.repository';
+import { LoadAllCountryRepository } from './load-all-country.repository';
 
-describe('FindCountryRepository', () => {
+describe('LoadAllCountryRepository', () => {
   let repository;
   let mockData;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [FindCountryRepository],
+      providers: [LoadAllCountryRepository],
     }).compile();
 
-    repository = module.get<FindCountryRepository>(FindCountryRepository);
+    repository = module.get<LoadAllCountryRepository>(LoadAllCountryRepository);
     repository.find = jest.fn();
     mockData = [
       {
@@ -33,18 +33,18 @@ describe('FindCountryRepository', () => {
   describe('getAllCountry', () => {
     it('should be find with correct params', async () => {
       repository.find = jest.fn().mockReturnValue({});
-      await repository.findAllCountry();
+      await repository.loadAllCountry();
       expect(repository.find).toBeCalledWith();
     });
 
     it('should be throw find returns empty', async () => {
       repository.find = jest.fn().mockReturnValue(undefined);
-      await expect(repository.findAllCountry({})).rejects.toThrow(new NotFoundException('There is no record'));
+      await expect(repository.loadAllCountry({})).rejects.toThrow(new NotFoundException('There is no record'));
     });
 
     it('should be returns when find returns', async () => {
       repository.find = jest.fn().mockReturnValue(mockData);
-      expect(await repository.findAllCountry()).toEqual(mockData);
+      expect(await repository.loadAllCountry()).toEqual(mockData);
     });
   });
 });

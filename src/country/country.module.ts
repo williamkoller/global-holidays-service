@@ -4,12 +4,12 @@ import { CountryController } from './controllers/country.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Country } from 'src/entities/country.entity';
 import { ContinentModule } from 'src/continent/continent.module';
-import { FindCountryRepository } from './repositories/find-country/find-country.repository';
-import { CreateCountryRepository } from './repositories/create-country/create-country.repository';
+import { LoadAllCountryRepository } from './repositories/load-all-country/load-all-country.repository';
+import { AddCountryRepository } from './repositories/add-country/add-country.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Country]), forwardRef(() => ContinentModule)],
-  providers: [CountryService, FindCountryRepository, CreateCountryRepository],
+  providers: [CountryService, LoadAllCountryRepository, AddCountryRepository],
   controllers: [CountryController],
 })
 export class CountryModule {}

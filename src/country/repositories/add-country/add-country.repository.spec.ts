@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateCountryRepository } from './create-country.repository';
+import { AddCountryRepository } from './add-country.repository';
 
-describe('CreateCountryRepository', () => {
+describe('AddCountryRepository', () => {
   let repository;
   let mockData;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CreateCountryRepository],
+      providers: [AddCountryRepository],
     }).compile();
 
-    repository = module.get<CreateCountryRepository>(CreateCountryRepository);
+    repository = module.get<AddCountryRepository>(AddCountryRepository);
     repository.save = jest.fn();
     mockData = [
       {
@@ -30,7 +30,7 @@ describe('CreateCountryRepository', () => {
 
   it('should be called save with correct params', async () => {
     repository.save = jest.fn().mockReturnValue(mockData);
-    await repository.createCountry(mockData);
+    await repository.addCountry(mockData);
     expect(repository.save).toBeCalledWith(mockData);
   });
 });
