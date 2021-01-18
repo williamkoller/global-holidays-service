@@ -54,4 +54,9 @@ describe('AddCountryRepository', () => {
     (repository.save as jest.Mock).mockRejectedValue(new InternalServerErrorException());
     await expect(repository.addCountry(mockError)).rejects.toThrow(new InternalServerErrorException());
   });
+
+  it('should be returns created data', async () => {
+    (repository.save as jest.Mock).mockReturnValue(mockData);
+    expect(await repository.addCountry(mockData)).toEqual(mockData);
+  });
 });
