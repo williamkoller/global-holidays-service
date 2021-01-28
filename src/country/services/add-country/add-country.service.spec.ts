@@ -1,9 +1,9 @@
 import { InternalServerErrorException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Continent } from '../../../entities/continent.entity';
-import { Country } from '../../../entities/country.entity';
-import { AddCountryRepository } from '../../../country/repositories/export';
-import { AddCountryService } from '../export';
+import { Continent } from '@/entities/continent.entity';
+import { Country } from '@/entities/country.entity';
+import { AddCountryRepository } from '@/country/repositories/export';
+import { AddCountryService } from '@/country/services/export';
 
 describe('AddCountryService', () => {
   let service: AddCountryService;

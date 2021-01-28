@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AddCountryRepository } from './add-country.repository';
-import { Country } from '../../../entities/country.entity';
-import { Continent } from '../../../entities/continent.entity';
+import { AddCountryRepository } from '@/country/repositories/add-country/add-country.repository';
+import { Country } from '@/entities/country.entity';
+import { Continent } from '@/entities/continent.entity';
 import { InternalServerErrorException } from '@nestjs/common';
 
 describe('AddCountryRepository', () => {

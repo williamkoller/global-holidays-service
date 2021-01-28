@@ -1,6 +1,6 @@
-import { Country } from '../../../entities/country.entity';
+import { Country } from '@/entities/country.entity';
 import { EntityRepository, Repository } from 'typeorm';
-import { CreateCountryDto } from '../../dtos/create-country.dto';
+import { CreateCountryDto } from '@/country/dtos/create-country.dto';
 import { InternalServerErrorException } from '@nestjs/common';
 import { validateOrReject } from 'class-validator';
 
@@ -8,8 +8,9 @@ import { validateOrReject } from 'class-validator';
 export class AddCountryRepository extends Repository<Country> {
   async addCountry(createCountryDto: CreateCountryDto): Promise<Country> {
     try {
+      const country = Object.assign({} as Country, createCountryDto);
       await validateOrReject(createCountryDto);
-      return await this.save(createCountryDto);
+      return await this.save(country);
     } catch (e) {
       throw new InternalServerErrorException(e);
     }

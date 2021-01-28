@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator';
-import { Continent } from 'src/entities/continent.entity';
+import { Continent } from '@/entities/continent.entity';
 
 export class CreateCountryDto {
   @IsString()

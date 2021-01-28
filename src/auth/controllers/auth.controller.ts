@@ -1,5 +1,5 @@
 import { BadGatewayException, BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '@/auth/services/auth.service';
 
 @Controller('auth')
 export class AuthController {

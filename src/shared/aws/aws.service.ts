@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CognitoIdentityServiceProvider } from 'aws-sdk';
 import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 
-import { AuthConfig } from 'src/auth/config/auth.config';
+import { AuthConfig } from '@/auth/config/auth.config';
 
 export interface ICognitoUser {
   sub: string;

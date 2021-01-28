@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import * as rateLimit from 'express-rate-limit';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from '@/app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 declare const module: any;
 
@@ -16,6 +17,8 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix('api');
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(process.env.PORT);
 

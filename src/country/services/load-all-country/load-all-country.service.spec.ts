@@ -1,7 +1,7 @@
 import { InternalServerErrorException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { LoadAllCountryRepository } from '../../../country/repositories/export';
-import { LoadAllCountryService } from '../export';
+import { LoadAllCountryRepository } from '@/country/repositories/export';
+import { LoadAllCountryService } from '@/country/services/export';
 
 describe('LoadAllCountryService', () => {
   let service: LoadAllCountryService;

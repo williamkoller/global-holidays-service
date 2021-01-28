@@ -1,4 +1,4 @@
-import { configService } from '../config/config.service';
+import { configService } from '@/config/config.service';
 import fs = require('fs');
 
 const [migrations, seed] = configService.getTypeOrmConfig();

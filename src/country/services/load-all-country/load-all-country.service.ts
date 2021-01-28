@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Country } from 'src/entities/country.entity';
-import { LoadAllCountryRepository } from '../../../country/repositories/export';
+import { Country } from '@/entities/country.entity';
+import { LoadAllCountryRepository } from '@/country/repositories/export';
 
 @Injectable()
 export class LoadAllCountryService {
