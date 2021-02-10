@@ -42,7 +42,7 @@
     "@nestjs/platform-express": "^7.5.1",
     "@nestjs/typeorm": "^7.1.5",
     "amazon-cognito-identity-js": "^4.5.7",
-    "aws-sdk": "^2.828.0",
+    "aws-sdk": "^2.829.0",
     "axios": "^0.21.1",
     "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
