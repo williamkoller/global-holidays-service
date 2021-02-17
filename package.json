@@ -35,9 +35,9 @@
     "start:dev:db-all": "./src/scripts/start-db.sh && npm run typeorm:migration:run && npm run seed:run"
   },
   "dependencies": {
-    "@nestjs/common": "^7.5.1",
-    "@nestjs/core": "^7.5.1",
-    "@nestjs/platform-express": "^7.5.1",
+    "@nestjs/common": "^7.6.6",
+    "@nestjs/core": "^7.6.6",
+    "@nestjs/platform-express": "^7.6.6",
     "@nestjs/typeorm": "^7.1.5",
     "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
