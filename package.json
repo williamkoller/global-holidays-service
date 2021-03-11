@@ -43,7 +43,7 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "dotenv": "^8.2.0",
-    "express-rate-limit": "^5.2.5",
+    "express-rate-limit": "^5.2.6",
     "lodash": "^4.17.20",
     "npm-check": "^5.9.2",
     "pg": "^8.5.1",
