@@ -36,7 +36,7 @@
     "start:dev:db-all": "./src/scripts/start-db.sh && npm run typeorm:migration:run && npm run seed:run"
   },
   "dependencies": {
-    "@nestjs/common": "^7.6.12",
+    "@nestjs/common": "^8.0.7",
     "@nestjs/core": "^7.6.12",
     "@nestjs/platform-express": "^7.6.12",
     "@nestjs/typeorm": "^7.1.5",
